@@ -488,6 +488,122 @@
     border-radius: 1px;
   }
 
+  /* ── MOBILE ── */
+  @media (max-width: 600px) {
+
+    .slide { padding: 28px 16px; }
+
+    /* Ticket slide — reflow to vertical on small screens */
+    .ticket-slide-wrap { width: 96vw; }
+
+    .ts-main {
+      flex-direction: column;
+      height: auto;
+    }
+
+    .ts-left {
+      width: 100%;
+      padding: 24px 20px 20px;
+      flex-direction: row;
+      gap: 16px;
+      justify-content: center;
+      border-radius: 0;
+    }
+
+    .ts-left svg { margin-bottom: 0; width: 60px; height: 42px; }
+
+    .ts-tear-line { display: none; }
+
+    .ts-left-text { text-align: left; }
+
+    .ts-label { margin-bottom: 2px; }
+
+    .ts-name { font-size: 28px; }
+
+    .ts-right {
+      padding: 18px 18px 60px;
+    }
+
+    .ts-headline { font-size: 32px; }
+
+    .ts-eyebrow { font-size: 8px; letter-spacing: 3px; }
+
+    .ts-details { gap: 14px; flex-wrap: wrap; }
+
+    .ts-detail-value { font-size: 16px; }
+    .ts-detail-value.dest { font-size: 15px; }
+
+    .ts-stamp {
+      width: 56px; height: 56px;
+      bottom: 16px; right: 16px;
+    }
+
+    /* tear row — match new left width */
+    .ts-tear-l { width: 0; display: none; }
+    .ts-tear-row { padding: 0; }
+    .ts-scissor { display: none; }
+    .ts-tear-r { flex: 1; }
+
+    /* stub — stack vertically */
+    .ts-stub {
+      flex-direction: column;
+      height: auto;
+    }
+
+    .ts-stub-left {
+      width: 100%;
+      border-right: none;
+      border-bottom: 2px dashed rgba(255,255,255,0.12);
+      padding: 12px;
+      font-size: 20px;
+      gap: 14px;
+    }
+
+    .ts-stub-right {
+      flex-wrap: wrap;
+      gap: 14px;
+      padding: 16px;
+      justify-content: flex-start;
+    }
+
+    .ts-stub-loc { font-size: 17px; }
+    .ts-stub-date { font-size: 17px; text-align: left; }
+    .ts-stub-wish { font-size: 15px; text-align: left; }
+    .ts-barcode { display: none; }
+
+    /* Day slides */
+    .day-title { font-size: clamp(28px, 9vw, 44px); }
+    .day-header { margin-bottom: 18px; }
+
+    .itinerary-list { max-width: 100%; }
+
+    .itinerary-item { padding: 10px 0; gap: 12px; }
+
+    .item-title { font-size: clamp(15px, 4vw, 19px); }
+    .item-desc { font-size: clamp(13px, 3.2vw, 15px); }
+
+    /* Pack grid — single column on very small screens */
+    .pack-grid {
+      grid-template-columns: 1fr 1fr;
+      gap: 10px 20px;
+      margin-top: 14px;
+    }
+
+    .pack-label { font-size: clamp(13px, 3.5vw, 17px); }
+
+    /* Message slide */
+    .message-text { font-size: clamp(16px, 4.5vw, 22px); }
+
+    /* Destination slide */
+    .dest-name { font-size: clamp(40px, 12vw, 70px); }
+    .dest-content { margin-bottom: 120px; }
+
+    /* End slide */
+    .end-title { font-size: clamp(34px, 10vw, 60px); }
+    .end-sub { font-size: clamp(22px, 7vw, 36px); }
+    .end-body { font-size: clamp(14px, 3.8vw, 20px); }
+  }
+
   /* ── SLIDE 1: BIRTHDAY ── */
   #slide-1 {
     background: radial-gradient(ellipse at 30% 40%, #1e3329 0%, var(--dark) 65%);
