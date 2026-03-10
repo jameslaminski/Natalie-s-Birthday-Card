@@ -74,34 +74,31 @@
   /* nav arrows */
   .nav-arrow {
     position: fixed;
-    top: 50%;
-    transform: translateY(-50%);
+    top: 0;
+    bottom: 0;
     z-index: 100;
-    background: rgba(255,255,255,0.08);
-    border: 1px solid rgba(255,255,255,0.15);
-    color: rgba(255,255,255,0.6);
-    width: 44px; height: 44px;
-    border-radius: 50%;
+    background: none;
+    border: none;
+    color: rgba(255,255,255,0.15);
+    width: 48px;
+    cursor: pointer;
+    font-size: 13px;
+    font-family: 'Josefin Sans', sans-serif;
+    font-weight: 200;
     display: flex;
     align-items: center;
     justify-content: center;
-    cursor: pointer;
-    font-size: 18px;
-    transition: background 0.2s, color 0.2s, opacity 0.3s;
+    transition: color 0.2s, opacity 0.3s;
     -webkit-tap-highlight-color: transparent;
     user-select: none;
   }
 
-  .nav-arrow:hover {
-    background: rgba(200,135,58,0.25);
-    color: #f5ede0;
-    border-color: rgba(200,135,58,0.4);
-  }
+  .nav-arrow:hover { color: rgba(255,255,255,0.4); }
 
   .nav-arrow.hidden { opacity: 0; pointer-events: none; }
 
-  #arrow-prev { left: 14px; }
-  #arrow-next { right: 14px; }
+  #arrow-prev { left: 0; }
+  #arrow-next { right: 0; }
 
   /* progress dots */
   #dots {
@@ -1068,8 +1065,8 @@
 <body>
 
 <!-- Nav arrows -->
-<button class="nav-arrow hidden" id="arrow-prev" aria-label="Previous">&#8592;</button>
-<button class="nav-arrow" id="arrow-next" aria-label="Next">&#8594;</button>
+<button class="nav-arrow hidden" id="arrow-prev" aria-label="Previous">&lt;</button>
+<button class="nav-arrow" id="arrow-next" aria-label="Next">&gt;</button>
 
 <!-- Progress dots -->
 <div id="dots"></div>
@@ -1407,10 +1404,8 @@
     updateArrows();
   }
 
-  arrowPrev.addEventListener('click', e => { e.stopPropagation(); goTo(current - 1); });
-  arrowNext.addEventListener('click', e => { e.stopPropagation(); goTo(current + 1); });
-
-  document.addEventListener('click', () => goTo(current + 1));
+  arrowPrev.addEventListener('click', () => goTo(current - 1));
+  arrowNext.addEventListener('click', () => goTo(current + 1));
   document.addEventListener('keydown', e => {
     if (e.key === 'ArrowRight' || e.key === ' ') goTo(current + 1);
     if (e.key === 'ArrowLeft') goTo(current - 1);
