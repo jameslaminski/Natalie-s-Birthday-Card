@@ -1060,6 +1060,75 @@
   }
 
   .slide.active .end-hearts { opacity: 1; }
+
+  /* ── MAP SLIDE ── */
+  #slide-map {
+    background: linear-gradient(160deg, #0e1e16 0%, #091210 100%);
+    overflow: hidden;
+    padding: 30px 20px 20px;
+  }
+
+  .map-eyebrow {
+    font-size: 9px;
+    letter-spacing: 5px;
+    text-transform: uppercase;
+    color: var(--sage);
+    margin-bottom: 8px;
+    opacity: 0;
+    transition: all 0.6s ease 0.2s;
+    position: relative;
+    z-index: 2;
+  }
+
+  .slide.active .map-eyebrow { opacity: 1; }
+
+  .map-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 600;
+    font-size: clamp(28px, 6vw, 46px);
+    line-height: 1;
+    margin-bottom: 20px;
+    opacity: 0;
+    transform: translateY(10px);
+    transition: all 0.7s ease 0.35s;
+    position: relative;
+    z-index: 2;
+  }
+
+  .slide.active .map-title { opacity: 1; transform: translateY(0); }
+
+  .map-container {
+    width: min(540px, 94vw);
+    position: relative;
+    z-index: 2;
+  }
+
+  .map-label {
+    position: absolute;
+    font-family: 'Josefin Sans', sans-serif;
+    font-size: 8px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    background: rgba(20,40,28,0.92);
+    border: 1px solid rgba(168,197,160,0.25);
+    color: var(--sage);
+    padding: 4px 10px;
+    border-radius: 20px;
+    white-space: nowrap;
+    opacity: 0;
+    transition: opacity 0.4s ease;
+    pointer-events: none;
+    line-height: 1.5;
+  }
+
+  .map-label .lbl-name {
+    color: var(--cream);
+    font-weight: 600;
+    display: block;
+    font-size: 9px;
+  }
+
+  .map-label.visible { opacity: 1; }
 </style>
 </head>
 <body>
