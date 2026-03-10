@@ -71,6 +71,38 @@
     50% { opacity: 0.7; }
   }
 
+  /* nav arrows */
+  .nav-arrow {
+    position: fixed;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 100;
+    background: rgba(255,255,255,0.08);
+    border: 1px solid rgba(255,255,255,0.15);
+    color: rgba(255,255,255,0.6);
+    width: 44px; height: 44px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    font-size: 18px;
+    transition: background 0.2s, color 0.2s, opacity 0.3s;
+    -webkit-tap-highlight-color: transparent;
+    user-select: none;
+  }
+
+  .nav-arrow:hover {
+    background: rgba(200,135,58,0.25);
+    color: #f5ede0;
+    border-color: rgba(200,135,58,0.4);
+  }
+
+  .nav-arrow.hidden { opacity: 0; pointer-events: none; }
+
+  #arrow-prev { left: 14px; }
+  #arrow-next { right: 14px; }
+
   /* progress dots */
   #dots {
     position: fixed;
@@ -792,11 +824,15 @@
 
   .dest-dates {
     font-family: 'Caveat', cursive;
-    font-size: 32px;
-    color: var(--sage);
-    margin-top: 16px;
+    font-size: 28px;
+    color: var(--forest);
+    margin-top: 18px;
     opacity: 0;
     transition: all 0.7s ease 1.1s;
+    background: var(--sage);
+    display: inline-block;
+    padding: 6px 22px 4px;
+    border-radius: 40px;
   }
 
   .slide.active .dest-dates { opacity: 1; }
@@ -1030,6 +1066,10 @@
 </style>
 </head>
 <body>
+
+<!-- Nav arrows -->
+<button class="nav-arrow hidden" id="arrow-prev" aria-label="Previous">&#8592;</button>
+<button class="nav-arrow" id="arrow-next" aria-label="Next">&#8594;</button>
 
 <!-- Progress dots -->
 <div id="dots"></div>
@@ -1341,7 +1381,9 @@
 
   // Slideshow logic
   const slides = document.querySelectorAll('.slide');
-  const dotsContainer = document.getElementById('#dots' ? 'dots' : 'dots');
+  const dotsContainer = document.getElementById('dots');
+  const arrowPrev = document.getElementById('arrow-prev');
+  const arrowNext = document.getElementById('arrow-next');
   let current = 0;
 
   // Build dots
@@ -1351,13 +1393,22 @@
     dotsContainer.appendChild(dot);
   });
 
+  function updateArrows() {
+    arrowPrev.classList.toggle('hidden', current === 0);
+    arrowNext.classList.toggle('hidden', current === slides.length - 1);
+  }
+
   function goTo(n) {
     slides[current].classList.remove('active');
     dotsContainer.children[current].classList.remove('active');
-    current = (n + slides.length) % slides.length;
+    current = Math.max(0, Math.min(n, slides.length - 1));
     slides[current].classList.add('active');
     dotsContainer.children[current].classList.add('active');
+    updateArrows();
   }
+
+  arrowPrev.addEventListener('click', e => { e.stopPropagation(); goTo(current - 1); });
+  arrowNext.addEventListener('click', e => { e.stopPropagation(); goTo(current + 1); });
 
   document.addEventListener('click', () => goTo(current + 1));
   document.addEventListener('keydown', e => {
