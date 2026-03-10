@@ -1337,59 +1337,57 @@
           <path d="M 112 215 Q 178 202 244 214 Q 290 224 316 246" stroke="#2d4a3e" stroke-width="0.5" opacity="0.16" fill="none"/>
           <path d="M 112 298 Q 175 284 244 294 Q 288 302 308 320" stroke="#2d4a3e" stroke-width="0.4" opacity="0.12" fill="none"/>
 
-          <!-- ROUTE: Hobart → straight north → Ross → curves left → Sheffield → Cradle -->
+          <!-- ROUTE: bottom-centre → north → Ross → hooks left → Sheffield → Cradle (~3/4 up) -->
           <path id="route-path"
-            d="M 238 400
-               C 240 372, 243 345, 245 318
-               C 247 302, 248 292, 248 292
-               C 248 278, 246 260, 240 244
-               C 233 226, 218 210, 202 196
-               C 190 185, 180 180, 172 178
-               C 163 176, 153 179, 148 187
-               C 144 193, 143 196, 145 198"
+            d="M 210 350
+               C 215 332, 220 314, 226 300
+               C 232 292, 238 288, 244 290
+               C 246 272, 244 252, 238 234
+               C 230 214, 215 198, 198 184
+               C 184 172, 175 166, 218 120
+               C 210 112, 178 108, 145 108"
             stroke="#c8873a" stroke-width="1.8" fill="none"
             stroke-dasharray="6 5" stroke-linecap="round" opacity="0.2"/>
 
           <path id="route-draw"
-            d="M 238 400
-               C 240 372, 243 345, 245 318
-               C 247 302, 248 292, 248 292
-               C 248 278, 246 260, 240 244
-               C 233 226, 218 210, 202 196
-               C 190 185, 180 180, 172 178
-               C 163 176, 153 179, 148 187
-               C 144 193, 143 196, 145 198"
+            d="M 210 350
+               C 215 332, 220 314, 226 300
+               C 232 292, 238 288, 244 290
+               C 246 272, 244 252, 238 234
+               C 230 214, 215 198, 198 184
+               C 184 172, 175 166, 218 120
+               C 210 112, 178 108, 145 108"
             stroke="#c8873a" stroke-width="2.5" fill="none"
             stroke-linecap="round" stroke-linejoin="round"
             stroke-dasharray="700" stroke-dashoffset="700"
             style="transition: stroke-dashoffset 1.8s cubic-bezier(0.4,0,0.2,1) 0.5s;"/>
 
-          <!-- Hobart -->
-          <circle id="pulse-hobart" cx="238" cy="400" r="10" fill="#c8873a" opacity="0"/>
-          <circle id="dot-hobart"   cx="238" cy="400" r="5"  fill="#c8873a" opacity="0"/>
+          <!-- Hobart - bottom centre point -->
+          <circle id="pulse-hobart" cx="210" cy="350" r="10" fill="#c8873a" opacity="0"/>
+          <circle id="dot-hobart"   cx="210" cy="350" r="5"  fill="#c8873a" opacity="0"/>
 
-          <!-- Ross -->
-          <circle id="pulse-ross" cx="248" cy="292" r="10" fill="#c8873a" opacity="0"/>
-          <circle id="dot-ross"   cx="248" cy="292" r="5"  fill="#c8873a" opacity="0"/>
+          <!-- Ross - centre right -->
+          <circle id="pulse-ross" cx="244" cy="290" r="10" fill="#c8873a" opacity="0"/>
+          <circle id="dot-ross"   cx="244" cy="290" r="5"  fill="#c8873a" opacity="0"/>
 
-          <!-- Sheffield -->
-          <circle id="pulse-shef" cx="172" cy="178" r="10" fill="#c8873a" opacity="0"/>
-          <circle id="dot-shef"   cx="172" cy="178" r="5"  fill="#c8873a" opacity="0"/>
+          <!-- Sheffield - moved far right -->
+          <circle id="pulse-shef" cx="218" cy="120" r="10" fill="#c8873a" opacity="0"/>
+          <circle id="dot-shef"   cx="218" cy="120" r="5"  fill="#c8873a" opacity="0"/>
 
-          <!-- Cradle Mountain -->
-          <circle id="pulse-cradle" cx="145" cy="198" r="12" fill="#a8c5a0" opacity="0"/>
-          <circle id="dot-cradle"   cx="145" cy="198" r="6"  fill="#a8c5a0" opacity="0"/>
+          <!-- Cradle Mountain - back to original left position -->
+          <circle id="pulse-cradle" cx="145" cy="108" r="12" fill="#a8c5a0" opacity="0"/>
+          <circle id="dot-cradle"   cx="145" cy="108" r="6"  fill="#a8c5a0" opacity="0"/>
 
           <!-- Mountain icon at Cradle -->
           <g id="mt-icon" opacity="0">
-            <polygon points="145,173 132,198 158,198" fill="#3d6b55"/>
-            <polygon points="145,173 140,187 150,187" fill="#f5ede0" opacity="0.9"/>
+            <polygon points="145,83 132,108 158,108" fill="#3d6b55"/>
+            <polygon points="145,83 140,97 150,97" fill="#f5ede0" opacity="0.9"/>
           </g>
 
         </svg>
 
         <!-- Labels -->
-        <div class="map-label" id="lbl-hobart" style="bottom:3%;right:8%;">
+        <div class="map-label" id="lbl-hobart" style="bottom:14%;left:42%;">
           <span class="lbl-name">Hobart</span>
           Start · Fri afternoon
         </div>
@@ -1397,11 +1395,11 @@
           <span class="lbl-name">Ross</span>
           Fri night · Sat breakfast
         </div>
-        <div class="map-label" id="lbl-shef" style="top:32%;left:42%;">
+        <div class="map-label" id="lbl-shef" style="top:22%;right:4%;">
           <span class="lbl-name">Sheffield</span>
           Sat evening
         </div>
-        <div class="map-label" id="lbl-cradle" style="top:40%;left:0%;">
+        <div class="map-label" id="lbl-cradle" style="top:18%;left:0%;">
           <span class="lbl-name">Cradle Mountain</span>
           Sun · Canyoning 🏔
         </div>
@@ -1457,7 +1455,7 @@
         <div class="item-content">
           <div class="item-time">11:00 AM – 12:00 PM</div>
           <div class="item-title">Waldheim Alpine Spa</div>
-          <div class="item-desc">Private sauna for two</div>
+          <div class="item-desc">Private sauna for two · potential morning massage or bouldering at Badgers Range</div>
         </div>
       </li>
       <li class="itinerary-item">
@@ -1597,12 +1595,12 @@
     mini.innerHTML = `<svg viewBox="0 0 400 460" style="width:100%;height:100%;filter:drop-shadow(0 2px 8px rgba(0,0,0,0.6))">
       <polygon points="152,24 195,14 240,18 272,24 300,18 320,34 334,56 336,84 330,112 334,136 326,158 318,178 318,200 322,224 316,248 306,268 296,284 288,302 282,320 275,336 268,350 260,362 252,374 244,384 238,394 230,384 222,372 214,360 207,350 200,360 192,372 184,382 176,372 168,358 155,340 140,320 125,300 112,280 102,258 95,236 88,214 84,192 82,170 86,150 92,130 96,110 90,92 86,74 92,56 104,42 120,30 138,22"
         fill="#1a2e1e" stroke="#3d6b55" stroke-width="2" stroke-linejoin="round"/>
-      <path d="M 238 400 C 240 372, 243 345, 245 318 C 247 302, 248 292, 248 292 C 248 278, 246 260, 240 244 C 233 226, 218 210, 202 196 C 190 185, 180 180, 172 178 C 163 176, 153 179, 148 187 C 144 193, 143 196, 145 198"
+      <path d="M 210 350 C 215 332, 220 314, 226 300 C 232 292, 238 288, 244 290 C 246 272, 244 252, 238 234 C 230 214, 215 198, 198 184 C 184 172, 170 164, 158 120 C 153 108, 148 100, 145 108"
         stroke="#c8873a" stroke-width="3" fill="none" stroke-dasharray="7 5" stroke-linecap="round" opacity="0.7"/>
-      <circle id="mini-dot-hobart" cx="238" cy="400" r="9"  fill="#c8873a" opacity="0"/>
-      <circle id="mini-dot-ross"   cx="248" cy="292" r="9"  fill="#c8873a" opacity="0"/>
-      <circle id="mini-dot-shef"   cx="172" cy="178" r="9"  fill="#c8873a" opacity="0"/>
-      <circle id="mini-dot-cradle" cx="145" cy="198" r="10" fill="#a8c5a0" opacity="0"/>
+      <circle id="mini-dot-hobart" cx="210" cy="350" r="9"  fill="#c8873a" opacity="0"/>
+      <circle id="mini-dot-ross"   cx="244" cy="290" r="9"  fill="#c8873a" opacity="0"/>
+      <circle id="mini-dot-shef"   cx="218" cy="120" r="9"  fill="#c8873a" opacity="0"/>
+      <circle id="mini-dot-cradle" cx="145" cy="108" r="10" fill="#a8c5a0" opacity="0"/>
     </svg>`;
     document.body.appendChild(mini);
     return mini;
