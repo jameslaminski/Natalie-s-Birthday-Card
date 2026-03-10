@@ -1,0 +1,1261 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<title>Happy Birthday Natalie 🏔</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,600;1,300;1,600&family=Playfair+Display:ital,wght@0,700;1,400&family=Josefin+Sans:wght@200;400;600&family=Caveat:wght@500;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --forest: #2d4a3e;
+    --forest-light: #3d6b55;
+    --cream: #f5ede0;
+    --amber: #c8873a;
+    --sage: #a8c5a0;
+    --dark: #111a14;
+    --mist: #e8ddd0;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html, body {
+    width: 100%; height: 100%;
+    overflow: hidden;
+    background: var(--dark);
+    font-family: 'Josefin Sans', sans-serif;
+    color: var(--cream);
+    cursor: pointer;
+  }
+
+  /* ── SLIDES CONTAINER ── */
+  #slideshow {
+    width: 100%; height: 100%;
+    position: relative;
+  }
+
+  .slide {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.9s ease;
+    padding: 40px 24px;
+    text-align: center;
+  }
+
+  .slide.active {
+    opacity: 1;
+    pointer-events: all;
+  }
+
+  /* tap hint */
+  .tap-hint {
+    position: fixed;
+    bottom: 28px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 10px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.3);
+    animation: pulse 2.5s ease-in-out infinite;
+    z-index: 100;
+  }
+
+  @keyframes pulse {
+    0%, 100% { opacity: 0.3; }
+    50% { opacity: 0.7; }
+  }
+
+  /* progress dots */
+  #dots {
+    position: fixed;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 8px;
+    z-index: 100;
+  }
+
+  .dot {
+    width: 5px; height: 5px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.2);
+    transition: background 0.4s, transform 0.4s;
+  }
+
+  .dot.active {
+    background: var(--amber);
+    transform: scale(1.4);
+  }
+
+  /* ── SHARED ELEMENTS ── */
+  .eyebrow {
+    font-size: 9px;
+    letter-spacing: 5px;
+    text-transform: uppercase;
+    color: var(--sage);
+    margin-bottom: 14px;
+    opacity: 0;
+    transform: translateY(10px);
+    transition: all 0.7s ease 0.2s;
+  }
+
+  .slide.active .eyebrow { opacity: 1; transform: translateY(0); }
+
+  .big-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 600;
+    font-size: clamp(52px, 12vw, 96px);
+    line-height: 0.9;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 0.8s ease 0.3s;
+  }
+
+  .slide.active .big-title { opacity: 1; transform: translateY(0); }
+
+  .italic-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-weight: 300;
+  }
+
+  .body-text {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(18px, 4vw, 26px);
+    font-weight: 300;
+    line-height: 1.7;
+    max-width: 560px;
+    opacity: 0;
+    transform: translateY(14px);
+    transition: all 0.8s ease 0.5s;
+    color: var(--mist);
+  }
+
+  .slide.active .body-text { opacity: 1; transform: translateY(0); }
+
+  .divider {
+    width: 40px; height: 1px;
+    background: var(--amber);
+    margin: 24px auto;
+    opacity: 0;
+    transform: scaleX(0);
+    transition: all 0.6s ease 0.4s;
+    transform-origin: center;
+  }
+
+  .slide.active .divider { opacity: 1; transform: scaleX(1); }
+
+  /* ── SLIDE 0: TICKET ── */
+  #slide-0 {
+    background: radial-gradient(ellipse at 40% 50%, #1e2a40 0%, #0d1117 70%);
+    overflow: hidden;
+  }
+
+  #slide-0::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle at 70% 30%, rgba(200,135,58,0.06), transparent 50%);
+    pointer-events: none;
+  }
+
+  .ticket-slide-wrap {
+    width: min(740px, 94vw);
+    display: flex;
+    flex-direction: column;
+    opacity: 0;
+    transform: translateY(28px) scale(0.97);
+    transition: all 1s cubic-bezier(0.34, 1.2, 0.64, 1) 0.3s;
+    filter: drop-shadow(0 40px 80px rgba(0,0,0,0.7));
+  }
+
+  .slide.active .ticket-slide-wrap {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+
+  /* --- ticket internals scoped inside slide --- */
+  .ts-main {
+    background: #f5ede0;
+    border-radius: 16px 16px 0 0;
+    overflow: hidden;
+    position: relative;
+    display: flex;
+    height: 290px;
+  }
+
+  .ts-left {
+    background: #2d4a3e;
+    width: 210px;
+    flex-shrink: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 28px 20px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .ts-left::before {
+    content: '';
+    position: absolute;
+    top: -50px; left: -50px;
+    width: 180px; height: 180px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.04);
+  }
+
+  .ts-left::after {
+    content: '';
+    position: absolute;
+    bottom: -40px; right: -60px;
+    width: 160px; height: 160px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.03);
+  }
+
+  .ts-tear-line {
+    position: absolute;
+    right: 0; top: 0; bottom: 0;
+    width: 2px;
+    background: repeating-linear-gradient(
+      to bottom,
+      transparent, transparent 8px,
+      rgba(245,237,224,0.25) 8px,
+      rgba(245,237,224,0.25) 14px
+    );
+  }
+
+  .ts-label {
+    font-family: 'Josefin Sans', sans-serif;
+    font-size: 7px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: #a8c5a0;
+    margin-bottom: 4px;
+  }
+
+  .ts-name {
+    font-family: 'Caveat', cursive;
+    font-size: 34px;
+    color: #f5ede0;
+    text-align: center;
+    line-height: 1.1;
+  }
+
+  .ts-sub {
+    font-family: 'Josefin Sans', sans-serif;
+    font-size: 7px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: #7aad8a;
+    margin-top: 4px;
+    text-align: center;
+  }
+
+  .ts-right {
+    flex: 1;
+    padding: 26px 32px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    position: relative;
+    background: #f5ede0;
+  }
+
+  .ts-right::before {
+    content: '';
+    position: absolute;
+    top: 0; right: 0;
+    width: 160px; height: 100%;
+    background: repeating-linear-gradient(
+      -55deg,
+      transparent, transparent 18px,
+      rgba(200,135,58,0.04) 18px, rgba(200,135,58,0.04) 19px
+    );
+    pointer-events: none;
+  }
+
+  .ts-top-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+  }
+
+  .ts-badge {
+    background: #c8873a;
+    color: white;
+    font-size: 7px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-weight: 600;
+  }
+
+  .ts-num {
+    font-size: 9px;
+    letter-spacing: 2px;
+    color: #b0a090;
+    font-family: 'Josefin Sans', sans-serif;
+  }
+
+  .ts-eyebrow {
+    font-family: 'Josefin Sans', sans-serif;
+    font-size: 9px;
+    letter-spacing: 5px;
+    text-transform: uppercase;
+    color: #c8873a;
+    margin-bottom: 5px;
+  }
+
+  .ts-headline {
+    font-family: 'Playfair Display', serif;
+    font-size: 42px;
+    font-weight: 700;
+    color: #2a2a2a;
+    line-height: 0.95;
+    letter-spacing: -1px;
+  }
+
+  .ts-headline span { font-style: italic; color: #2d4a3e; }
+
+  .ts-details {
+    display: flex;
+    gap: 24px;
+    align-items: flex-end;
+  }
+
+  .ts-detail-label {
+    font-size: 6px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: #a09080;
+    margin-bottom: 2px;
+    font-family: 'Josefin Sans', sans-serif;
+  }
+
+  .ts-detail-value {
+    font-family: 'Caveat', cursive;
+    font-size: 19px;
+    color: #2a2a2a;
+  }
+
+  .ts-detail-value.dest { font-size: 17px; color: #2d4a3e; font-weight: 600; }
+
+  .ts-stamp {
+    position: absolute;
+    bottom: 22px; right: 26px;
+    width: 68px; height: 68px;
+    border: 2.5px solid #c8873a;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transform: rotate(-14deg);
+    opacity: 0.9;
+  }
+
+  .ts-stamp-inner {
+    font-size: 6.5px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: #c8873a;
+    text-align: center;
+    line-height: 1.8;
+    font-weight: 600;
+    font-family: 'Josefin Sans', sans-serif;
+  }
+
+  /* tear row */
+  .ts-tear-row {
+    display: flex;
+    align-items: center;
+    height: 22px;
+  }
+
+  .ts-tear-l {
+    width: 210px;
+    height: 2px;
+    flex-shrink: 0;
+    background: repeating-linear-gradient(to right, transparent, transparent 6px, #3a5a4e 6px, #3a5a4e 12px);
+  }
+
+  .ts-tear-r {
+    flex: 1;
+    height: 2px;
+    background: repeating-linear-gradient(to right, transparent, transparent 6px, #c0a88a 6px, #c0a88a 12px);
+  }
+
+  .ts-scissor {
+    font-size: 16px;
+    margin: 0 7px;
+    transform: rotate(90deg);
+    opacity: 0.45;
+    flex-shrink: 0;
+  }
+
+  /* stub */
+  .ts-stub {
+    background: #2d4a3e;
+    border-radius: 0 0 16px 16px;
+    display: flex;
+    height: 90px;
+    overflow: hidden;
+  }
+
+  .ts-stub-left {
+    width: 210px;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-right: 2px dashed rgba(255,255,255,0.12);
+    gap: 10px;
+    font-size: 22px;
+    filter: saturate(0) brightness(1.5);
+    opacity: 0.7;
+  }
+
+  .ts-stub-right {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 16px 32px;
+  }
+
+  .ts-stub-label {
+    font-size: 6px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: #a8c5a0;
+    margin-bottom: 3px;
+    font-family: 'Josefin Sans', sans-serif;
+  }
+
+  .ts-stub-loc {
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    font-size: 20px;
+    color: #f5ede0;
+  }
+
+  .ts-stub-loc-sub {
+    font-size: 7px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: #7aad8a;
+    margin-top: 2px;
+    font-family: 'Josefin Sans', sans-serif;
+  }
+
+  .ts-stub-date {
+    font-family: 'Caveat', cursive;
+    font-size: 20px;
+    color: #f5ede0;
+    text-align: center;
+  }
+
+  .ts-stub-wish {
+    font-family: 'Caveat', cursive;
+    font-size: 17px;
+    color: #f5ede0;
+    text-align: right;
+  }
+
+  .ts-barcode {
+    display: flex;
+    gap: 2px;
+    align-items: flex-end;
+    height: 38px;
+    padding: 0 8px;
+    border-left: 1px solid rgba(255,255,255,0.1);
+    margin-left: 12px;
+  }
+
+  .ts-barcode span {
+    display: block;
+    background: rgba(255,255,255,0.4);
+    border-radius: 1px;
+  }
+
+  /* ── SLIDE 1: BIRTHDAY ── */
+  #slide-1 {
+    background: radial-gradient(ellipse at 30% 40%, #1e3329 0%, var(--dark) 65%);
+    overflow: hidden;
+  }
+
+  #slide-1::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: 
+      radial-gradient(circle at 80% 20%, rgba(200,135,58,0.08) 0%, transparent 40%),
+      radial-gradient(circle at 10% 80%, rgba(45,74,62,0.4) 0%, transparent 50%);
+    pointer-events: none;
+  }
+
+  .stars-bg {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+  }
+
+  .star {
+    position: absolute;
+    background: white;
+    border-radius: 50%;
+    animation: twinkle var(--d, 3s) ease-in-out infinite;
+    animation-delay: var(--delay, 0s);
+  }
+
+  @keyframes twinkle {
+    0%, 100% { opacity: var(--min-op, 0.2); transform: scale(1); }
+    50% { opacity: var(--max-op, 0.8); transform: scale(1.3); }
+  }
+
+  .birthday-name {
+    font-family: 'Caveat', cursive;
+    font-size: clamp(60px, 15vw, 110px);
+    color: var(--cream);
+    line-height: 1;
+    opacity: 0;
+    transform: scale(0.9) translateY(10px);
+    transition: all 1s cubic-bezier(0.34, 1.56, 0.64, 1) 0.2s;
+  }
+
+  .slide.active .birthday-name { opacity: 1; transform: scale(1) translateY(0); }
+
+  .birthday-sub {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: clamp(20px, 5vw, 32px);
+    color: var(--amber);
+    opacity: 0;
+    transition: all 0.8s ease 0.7s;
+  }
+
+  .slide.active .birthday-sub { opacity: 1; }
+
+  .heart-float {
+    font-size: 28px;
+    animation: floatUp 4s ease-in-out infinite;
+    display: inline-block;
+    margin-top: 20px;
+    opacity: 0;
+    transition: opacity 0.5s ease 1.2s;
+  }
+
+  .slide.active .heart-float { opacity: 1; }
+
+  @keyframes floatUp {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+  }
+
+  /* ── SLIDE 2: MESSAGE ── */
+  #slide-2 {
+    background: linear-gradient(160deg, #1a2e1f 0%, #0d1a10 100%);
+  }
+
+  #slide-2::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23a8c5a0' fill-opacity='0.025'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+    pointer-events: none;
+  }
+
+  .quote-mark {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 100px;
+    line-height: 0.5;
+    color: var(--amber);
+    opacity: 0.25;
+    display: block;
+    margin-bottom: -10px;
+    opacity: 0;
+    transition: opacity 0.5s ease 0.2s;
+  }
+
+  .slide.active .quote-mark { opacity: 0.25; }
+
+  .message-text {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(19px, 4.2vw, 28px);
+    font-weight: 300;
+    font-style: italic;
+    line-height: 1.75;
+    max-width: 580px;
+    color: var(--cream);
+    opacity: 0;
+    transform: translateY(16px);
+    transition: all 0.9s ease 0.4s;
+  }
+
+  .slide.active .message-text { opacity: 1; transform: translateY(0); }
+
+  .message-sig {
+    font-family: 'Caveat', cursive;
+    font-size: 28px;
+    color: var(--amber);
+    margin-top: 24px;
+    opacity: 0;
+    transition: opacity 0.7s ease 1s;
+  }
+
+  .slide.active .message-sig { opacity: 1; }
+
+  /* ── SLIDE 3: DESTINATION REVEAL ── */
+  #slide-3 {
+    background: #0b1a12;
+    overflow: hidden;
+  }
+
+  .mountain-reveal {
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    opacity: 0;
+    transform: translateY(30px);
+    transition: all 1.2s ease 0.4s;
+  }
+
+  .slide.active .mountain-reveal { opacity: 1; transform: translateY(0); }
+
+  .dest-content {
+    position: relative;
+    z-index: 2;
+    margin-bottom: 160px;
+  }
+
+  .dest-eyebrow {
+    font-size: 9px;
+    letter-spacing: 6px;
+    text-transform: uppercase;
+    color: var(--sage);
+    margin-bottom: 10px;
+    opacity: 0;
+    transition: all 0.6s ease 0.3s;
+  }
+
+  .slide.active .dest-eyebrow { opacity: 1; }
+
+  .dest-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 600;
+    font-size: clamp(48px, 11vw, 88px);
+    line-height: 0.95;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 0.9s cubic-bezier(0.34, 1.3, 0.64, 1) 0.5s;
+  }
+
+  .slide.active .dest-name { opacity: 1; transform: translateY(0); }
+
+  .dest-sub {
+    font-family: 'Josefin Sans', sans-serif;
+    font-size: 11px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: var(--amber);
+    margin-top: 12px;
+    opacity: 0;
+    transition: all 0.7s ease 0.9s;
+  }
+
+  .slide.active .dest-sub { opacity: 1; }
+
+  .dest-dates {
+    font-family: 'Caveat', cursive;
+    font-size: 32px;
+    color: var(--sage);
+    margin-top: 16px;
+    opacity: 0;
+    transition: all 0.7s ease 1.1s;
+  }
+
+  .slide.active .dest-dates { opacity: 1; }
+
+  /* ── SLIDE 4: ITINERARY FRIDAY ── */
+  .day-slide {
+    background: linear-gradient(145deg, #12221a 0%, #0a150d 100%);
+    overflow: hidden;
+  }
+
+  .day-slide::before {
+    content: '';
+    position: absolute;
+    top: -100px; right: -100px;
+    width: 350px; height: 350px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(200,135,58,0.06), transparent 70%);
+    pointer-events: none;
+  }
+
+  .day-header {
+    margin-bottom: 28px;
+  }
+
+  .day-label {
+    font-size: 8px;
+    letter-spacing: 5px;
+    text-transform: uppercase;
+    color: var(--amber);
+    margin-bottom: 6px;
+    opacity: 0;
+    transition: all 0.5s ease 0.2s;
+  }
+
+  .slide.active .day-label { opacity: 1; }
+
+  .day-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(36px, 8vw, 62px);
+    font-weight: 600;
+    line-height: 1;
+    opacity: 0;
+    transform: translateY(12px);
+    transition: all 0.7s ease 0.3s;
+  }
+
+  .slide.active .day-title { opacity: 1; transform: translateY(0); }
+
+  .day-date {
+    font-family: 'Josefin Sans', sans-serif;
+    font-size: 11px;
+    letter-spacing: 3px;
+    color: var(--sage);
+    margin-top: 4px;
+    text-transform: uppercase;
+    opacity: 0;
+    transition: all 0.6s ease 0.4s;
+  }
+
+  .slide.active .day-date { opacity: 1; }
+
+  .itinerary-list {
+    list-style: none;
+    max-width: 520px;
+    width: 100%;
+    text-align: left;
+  }
+
+  .itinerary-item {
+    display: flex;
+    gap: 16px;
+    align-items: flex-start;
+    padding: 12px 0;
+    border-bottom: 1px solid rgba(168,197,160,0.12);
+    opacity: 0;
+    transform: translateX(-12px);
+  }
+
+  .itinerary-item:last-child { border-bottom: none; }
+
+  .slide.active .itinerary-item:nth-child(1) { opacity: 1; transform: translateX(0); transition: all 0.6s ease 0.5s; }
+  .slide.active .itinerary-item:nth-child(2) { opacity: 1; transform: translateX(0); transition: all 0.6s ease 0.65s; }
+  .slide.active .itinerary-item:nth-child(3) { opacity: 1; transform: translateX(0); transition: all 0.6s ease 0.8s; }
+  .slide.active .itinerary-item:nth-child(4) { opacity: 1; transform: translateX(0); transition: all 0.6s ease 0.95s; }
+  .slide.active .itinerary-item:nth-child(5) { opacity: 1; transform: translateX(0); transition: all 0.6s ease 1.1s; }
+  .slide.active .itinerary-item:nth-child(6) { opacity: 1; transform: translateX(0); transition: all 0.6s ease 1.25s; }
+
+  .item-icon {
+    font-size: 20px;
+    flex-shrink: 0;
+    margin-top: 2px;
+    width: 28px;
+    text-align: center;
+  }
+
+  .item-content {}
+
+  .item-time {
+    font-size: 9px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--amber);
+    margin-bottom: 2px;
+  }
+
+  .item-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(17px, 3.5vw, 22px);
+    font-weight: 600;
+    color: var(--cream);
+    line-height: 1.2;
+  }
+
+  .item-desc {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(14px, 3vw, 17px);
+    font-weight: 300;
+    font-style: italic;
+    color: rgba(245,237,224,0.6);
+    margin-top: 2px;
+    line-height: 1.4;
+  }
+
+  /* ── SLIDE 7: PACK ── */
+  #slide-pack {
+    background: linear-gradient(160deg, #162a1e 0%, #0a1510 100%);
+  }
+
+  .pack-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px 28px;
+    max-width: 500px;
+    width: 100%;
+    text-align: left;
+    margin-top: 20px;
+  }
+
+  .pack-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    opacity: 0;
+    transform: translateY(8px);
+  }
+
+  .slide.active .pack-item:nth-child(1) { opacity: 1; transform: none; transition: all 0.5s ease 0.4s; }
+  .slide.active .pack-item:nth-child(2) { opacity: 1; transform: none; transition: all 0.5s ease 0.5s; }
+  .slide.active .pack-item:nth-child(3) { opacity: 1; transform: none; transition: all 0.5s ease 0.6s; }
+  .slide.active .pack-item:nth-child(4) { opacity: 1; transform: none; transition: all 0.5s ease 0.7s; }
+  .slide.active .pack-item:nth-child(5) { opacity: 1; transform: none; transition: all 0.5s ease 0.8s; }
+  .slide.active .pack-item:nth-child(6) { opacity: 1; transform: none; transition: all 0.5s ease 0.9s; }
+  .slide.active .pack-item:nth-child(7) { opacity: 1; transform: none; transition: all 0.5s ease 1.0s; }
+  .slide.active .pack-item:nth-child(8) { opacity: 1; transform: none; transition: all 0.5s ease 1.1s; }
+
+  .pack-icon { font-size: 20px; flex-shrink: 0; }
+
+  .pack-label {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(15px, 3.2vw, 19px);
+    color: var(--cream);
+    font-weight: 300;
+  }
+
+  /* ── SLIDE 8: CLOSING ── */
+  #slide-end {
+    background: radial-gradient(ellipse at center, #1e3329 0%, #0a1510 70%);
+    overflow: hidden;
+  }
+
+  #slide-end::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle at 50% 50%, rgba(200,135,58,0.08), transparent 60%);
+    pointer-events: none;
+  }
+
+  .end-mountain {
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    opacity: 0.15;
+  }
+
+  .end-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 600;
+    font-size: clamp(40px, 10vw, 78px);
+    line-height: 1;
+    opacity: 0;
+    transform: translateY(16px);
+    transition: all 0.9s ease 0.3s;
+  }
+
+  .slide.active .end-title { opacity: 1; transform: translateY(0); }
+
+  .end-sub {
+    font-family: 'Caveat', cursive;
+    font-size: clamp(26px, 6vw, 44px);
+    color: var(--amber);
+    opacity: 0;
+    transition: all 0.8s ease 0.8s;
+  }
+
+  .slide.active .end-sub { opacity: 1; }
+
+  .end-body {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: clamp(16px, 3.5vw, 22px);
+    color: var(--mist);
+    opacity: 0.7;
+    max-width: 400px;
+    line-height: 1.6;
+    margin-top: 16px;
+    opacity: 0;
+    transition: all 0.8s ease 1.1s;
+  }
+
+  .slide.active .end-body { opacity: 0.7; }
+
+  .end-hearts {
+    margin-top: 30px;
+    font-size: 28px;
+    letter-spacing: 8px;
+    opacity: 0;
+    transition: all 0.6s ease 1.4s;
+  }
+
+  .slide.active .end-hearts { opacity: 1; }
+</style>
+</head>
+<body>
+
+<!-- Progress dots -->
+<div id="dots"></div>
+
+<!-- Tap hint -->
+<div class="tap-hint">tap to continue</div>
+
+<div id="slideshow">
+
+  <!-- ── SLIDE 0: TICKET ── -->
+  <div class="slide active" id="slide-0">
+    <div class="ticket-slide-wrap">
+      <!-- Main ticket -->
+      <div class="ts-main">
+        <div class="ts-left">
+          <svg width="90" height="70" viewBox="0 0 100 78" fill="none" style="margin-bottom:14px;filter:drop-shadow(0 4px 14px rgba(0,0,0,0.35))">
+            <circle cx="12" cy="10" r="1.2" fill="#a8c5a0" opacity="0.8"/>
+            <circle cx="82" cy="7" r="1" fill="#a8c5a0" opacity="0.6"/>
+            <circle cx="60" cy="3" r="0.9" fill="#a8c5a0" opacity="0.7"/>
+            <circle cx="28" cy="5" r="0.7" fill="#a8c5a0" opacity="0.5"/>
+            <circle cx="90" cy="18" r="0.8" fill="#a8c5a0" opacity="0.4"/>
+            <path d="M76 12 Q83 8 88 12 Q83 22 76 18 Q80 15 80 15 Q78 11 76 12Z" fill="#e8d5a3" opacity="0.85"/>
+            <path d="M0 72 L18 42 L28 50 L40 28 L52 45 L62 30 L72 48 L82 38 L100 72Z" fill="#1e3329" opacity="0.6"/>
+            <path d="M15 72 L35 35 L40 40 L45 28 L50 32 L55 18 L60 28 L65 22 L70 30 L75 26 L85 72Z" fill="#3d6b55"/>
+            <path d="M55 18 L49 32 L61 32Z" fill="#f5ede0" opacity="0.95"/>
+            <path d="M65 22 L60 34 L70 34Z" fill="#f5ede0" opacity="0.7"/>
+            <ellipse cx="50" cy="72" rx="42" ry="4" fill="#1e3329" opacity="0.5"/>
+            <polygon points="20,72 23,56 26,72" fill="#1a2e25"/>
+            <polygon points="27,72 30,60 33,72" fill="#1a2e25"/>
+            <polygon points="72,72 75,58 78,72" fill="#1a2e25"/>
+            <polygon points="79,72 82,63 85,72" fill="#1a2e25"/>
+          </svg>
+          <div class="ts-label">this ticket belongs to</div>
+          <div class="ts-name">Natalie</div>
+          <div class="ts-sub">+ one lucky person</div>
+          <div class="ts-tear-line"></div>
+        </div>
+        <div class="ts-right">
+          <div class="ts-top-row">
+            <div class="ts-badge">✦ Admits Two ✦</div>
+            <div class="ts-num">#CMT-1315</div>
+          </div>
+          <div>
+            <div class="ts-eyebrow">✦ One unforgettable ✦</div>
+            <div class="ts-headline">Weekend<br><span>Away</span></div>
+          </div>
+          <div class="ts-details">
+            <div>
+              <div class="ts-detail-label">Destination</div>
+              <div class="ts-detail-value dest">Cradle Mountain, TAS 🏔</div>
+            </div>
+            <div>
+              <div class="ts-detail-label">Dates</div>
+              <div class="ts-detail-value">13–15 March</div>
+            </div>
+            <div>
+              <div class="ts-detail-label">Passengers</div>
+              <div class="ts-detail-value">You + Me 🖤</div>
+            </div>
+          </div>
+          <div class="ts-stamp"><div class="ts-stamp-inner">Happy<br>Birthday<br>★★★</div></div>
+        </div>
+      </div>
+      <!-- Tear -->
+      <div class="ts-tear-row">
+        <div class="ts-tear-l"></div>
+        <div class="ts-scissor">✂</div>
+        <div class="ts-tear-r"></div>
+      </div>
+      <!-- Stub -->
+      <div class="ts-stub">
+        <div class="ts-stub-left">🥾⛰️🌲🌅</div>
+        <div class="ts-stub-right">
+          <div>
+            <div class="ts-stub-label">Location</div>
+            <div class="ts-stub-loc">Cradle Mountain</div>
+            <div class="ts-stub-loc-sub">Tasmania · National Park</div>
+          </div>
+          <div>
+            <div class="ts-stub-label">Adventure Dates</div>
+            <div class="ts-stub-date">13–15 March 🗓</div>
+          </div>
+          <div>
+            <div class="ts-stub-label">With all my love</div>
+            <div class="ts-stub-wish">Happy Birthday,<br>Natalie 💚</div>
+          </div>
+          <div class="ts-barcode">
+            <span style="width:2px;height:36px"></span>
+            <span style="width:3px;height:28px"></span>
+            <span style="width:2px;height:36px"></span>
+            <span style="width:4px;height:20px"></span>
+            <span style="width:2px;height:36px"></span>
+            <span style="width:3px;height:30px"></span>
+            <span style="width:2px;height:36px"></span>
+            <span style="width:2px;height:18px"></span>
+            <span style="width:3px;height:36px"></span>
+            <span style="width:2px;height:24px"></span>
+            <span style="width:4px;height:36px"></span>
+            <span style="width:2px;height:16px"></span>
+            <span style="width:3px;height:36px"></span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── SLIDE 1: BIRTHDAY ── -->
+  <div class="slide" id="slide-1">
+    <div class="stars-bg" id="stars"></div>
+    <div class="eyebrow">✦ a very special day ✦</div>
+    <div class="birthday-name">Natalie</div>
+    <div class="birthday-sub">Happy Birthday, my love</div>
+    <div class="heart-float">🌿</div>
+  </div>
+
+  <!-- ── SLIDE 2: MESSAGE ── -->
+  <div class="slide" id="slide-2">
+    <span class="quote-mark">"</span>
+    <div class="message-text">
+      Happy birthday my love! I hope you have a wonderful day and are ready for another adventure.<br><br>
+      You mean the world to me and I love spending every moment with you. We've been wanting to get some more adventures together so I've planned a weekend away in the North.
+    </div>
+    <div class="message-sig">— with all my love 💚</div>
+  </div>
+
+  <!-- ── SLIDE 3: DESTINATION REVEAL ── -->
+  <div class="slide" id="slide-3">
+    <div class="dest-content">
+      <div class="dest-eyebrow">✦ your adventure awaits ✦</div>
+      <div class="dest-name">Cradle<br><span class="italic-title">Mountain</span></div>
+      <div class="dest-sub">Tasmania · National Park</div>
+      <div class="dest-dates">13 – 15 March 🏔</div>
+    </div>
+    <svg class="mountain-reveal" viewBox="0 0 800 300" fill="none" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMax slice">
+      <!-- sky glow -->
+      <rect width="800" height="300" fill="url(#skygrad)"/>
+      <defs>
+        <linearGradient id="skygrad" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stop-color="#0b1a12" stop-opacity="0"/>
+          <stop offset="100%" stop-color="#0b1a12" stop-opacity="0"/>
+        </linearGradient>
+      </defs>
+      <!-- back range misty -->
+      <path d="M0 300 L100 160 L160 200 L240 120 L310 170 L400 90 L480 150 L560 100 L640 160 L720 110 L800 170 L800 300Z" fill="#1a3024" opacity="0.5"/>
+      <!-- Cradle Mountain silhouette front -->
+      <path d="M120 300 L220 180 L255 200 L290 150 L315 165 L350 105 L375 125 L405 95 L430 115 L460 80 L490 100 L520 140 L560 110 L600 160 L660 130 L720 180 L800 300Z" fill="#2d4a3e"/>
+      <!-- Snow -->
+      <path d="M350 105 L330 140 L370 140Z" fill="#f5ede0" opacity="0.9"/>
+      <path d="M460 80 L443 112 L477 112Z" fill="#f5ede0" opacity="0.85"/>
+      <path d="M405 95 L390 120 L420 120Z" fill="#f5ede0" opacity="0.5"/>
+      <!-- Pencil pines -->
+      <polygon points="140,300 147,265 154,300" fill="#1e3329"/>
+      <polygon points="158,300 165,272 172,300" fill="#1e3329"/>
+      <polygon points="650,300 657,268 664,300" fill="#1e3329"/>
+      <polygon points="668,300 675,274 682,300" fill="#1e3329"/>
+      <polygon points="700,300 706,278 712,300" fill="#1e3329" opacity="0.7"/>
+      <!-- Lake reflection -->
+      <ellipse cx="400" cy="300" rx="380" ry="18" fill="#162d20" opacity="0.6"/>
+    </svg>
+  </div>
+
+  <!-- ── SLIDE 4: FRIDAY ── -->
+  <div class="slide day-slide" id="slide-4">
+    <div class="day-header">
+      <div class="day-label">Day One</div>
+      <div class="day-title">Friday<br><span class="italic-title" style="color:var(--sage)">the journey begins</span></div>
+      <div class="day-date">March 13, 2025</div>
+    </div>
+    <ul class="itinerary-list">
+      <li class="itinerary-item">
+        <div class="item-icon">🚗</div>
+        <div class="item-content">
+          <div class="item-time">Afternoon</div>
+          <div class="item-title">Drive from Hobart</div>
+          <div class="item-desc">Hitting the road and heading north</div>
+        </div>
+      </li>
+      <li class="itinerary-item">
+        <div class="item-icon">🏡</div>
+        <div class="item-content">
+          <div class="item-time">Evening</div>
+          <div class="item-title">Riverview at Ross</div>
+          <div class="item-desc">Overnight stay to break up the trip</div>
+        </div>
+      </li>
+    </ul>
+  </div>
+
+  <!-- ── SLIDE 5: SATURDAY ── -->
+  <div class="slide day-slide" id="slide-5">
+    <div class="day-header">
+      <div class="day-label">Day Two</div>
+      <div class="day-title">Saturday<br><span class="italic-title" style="color:var(--amber)">the adventure</span></div>
+      <div class="day-date">March 14, 2025</div>
+    </div>
+    <ul class="itinerary-list">
+      <li class="itinerary-item">
+        <div class="item-icon">☕</div>
+        <div class="item-content">
+          <div class="item-time">9:00 AM – 10:00 AM</div>
+          <div class="item-title">Breakfast in Ross</div>
+          <div class="item-desc">A slow morning coffee and breakfast in one of Tasmania's prettiest villages</div>
+        </div>
+      </li>
+      <li class="itinerary-item">
+        <div class="item-icon">🧖</div>
+        <div class="item-content">
+          <div class="item-time">11:00 AM – 12:00 PM</div>
+          <div class="item-title">Waldheim Alpine Spa</div>
+          <div class="item-desc">Private sauna for two · potential morning massage or bouldering at Badgers Range</div>
+        </div>
+      </li>
+      <li class="itinerary-item">
+        <div class="item-icon">🍷</div>
+        <div class="item-content">
+          <div class="item-time">2:45 PM</div>
+          <div class="item-title">Meander Valley Vineyard</div>
+          <div class="item-desc">Wine tasting & a long, lazy lunch</div>
+        </div>
+      </li>
+      <li class="itinerary-item">
+        <div class="item-icon">🏡</div>
+        <div class="item-content">
+          <div class="item-time">Evening</div>
+          <div class="item-title">Sheffield Chalet</div>
+          <div class="item-desc">Check in · salmon dinner cooked with love 🍣</div>
+        </div>
+      </li>
+    </ul>
+  </div>
+
+  <!-- ── SLIDE 6: SUNDAY ── -->
+  <div class="slide day-slide" id="slide-6">
+    <div class="day-header">
+      <div class="day-label">Day Three</div>
+      <div class="day-title">Sunday<br><span class="italic-title" style="color:var(--sage)">the wild day</span></div>
+      <div class="day-date">March 15, 2025</div>
+    </div>
+    <ul class="itinerary-list">
+      <li class="itinerary-item">
+        <div class="item-icon">🏞️</div>
+        <div class="item-content">
+          <div class="item-time">9:30 AM – Full Day</div>
+          <div class="item-title">Canyoning at Cradle Mountain</div>
+          <div class="item-desc">A full-day canyoning adventure — abseils, swims, jumps and all the wild things</div>
+        </div>
+      </li>
+      <li class="itinerary-item">
+        <div class="item-icon">🌅</div>
+        <div class="item-content">
+          <div class="item-time">Evening</div>
+          <div class="item-title">Tired, happy, home</div>
+          <div class="item-desc">The best kind of exhausted</div>
+        </div>
+      </li>
+    </ul>
+  </div>
+
+  <!-- ── SLIDE 7: PACK ── -->
+  <div class="slide" id="slide-pack">
+    <div class="eyebrow">✦ don't forget ✦</div>
+    <div class="big-title" style="font-size: clamp(38px,8vw,64px); margin-bottom:8px;">What to Pack</div>
+    <div class="divider"></div>
+    <div class="pack-grid">
+      <div class="pack-item"><span class="pack-icon">🥾</span><span class="pack-label">Hiking boots</span></div>
+      <div class="pack-item"><span class="pack-icon">🩱</span><span class="pack-label">Swimmers</span></div>
+      <div class="pack-item"><span class="pack-icon">🧥</span><span class="pack-label">Warm layers</span></div>
+      <div class="pack-item"><span class="pack-icon">🧴</span><span class="pack-label">Sunscreen</span></div>
+      <div class="pack-item"><span class="pack-icon">🎒</span><span class="pack-label">Day pack</span></div>
+      <div class="pack-item"><span class="pack-icon">📷</span><span class="pack-label">Camera</span></div>
+      <div class="pack-item"><span class="pack-icon">🌧️</span><span class="pack-label">Rain jacket</span></div>
+      <div class="pack-item"><span class="pack-icon">✨</span><span class="pack-label">Good vibes</span></div>
+    </div>
+  </div>
+
+  <!-- ── SLIDE 8: END ── -->
+  <div class="slide" id="slide-end">
+    <svg class="end-mountain" viewBox="0 0 800 200" fill="none" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMax slice">
+      <path d="M0 200 L150 80 L200 110 L260 50 L310 80 L360 20 L410 55 L460 30 L510 60 L580 90 L650 50 L730 100 L800 200Z" fill="#3d6b55"/>
+      <path d="M360 20 L340 55 L380 55Z" fill="#f5ede0" opacity="0.8"/>
+      <path d="M460 30 L443 60 L477 60Z" fill="#f5ede0" opacity="0.6"/>
+    </svg>
+    <div class="end-title">Let's go<br><span class="italic-title" style="color:var(--amber)">adventuring</span></div>
+    <div class="end-sub">Happy Birthday, Natalie 🏔</div>
+    <div class="end-body">Pack your boots, grab your jacket — the mountains are waiting for us.</div>
+    <div class="end-hearts">💚 🌿 💚</div>
+  </div>
+
+</div>
+
+<script>
+  // Generate stars
+  const starsContainer = document.getElementById('stars');
+  for (let i = 0; i < 60; i++) {
+    const star = document.createElement('div');
+    star.className = 'star';
+    const size = Math.random() * 2.5 + 0.5;
+    star.style.cssText = `
+      width: ${size}px; height: ${size}px;
+      top: ${Math.random() * 70}%;
+      left: ${Math.random() * 100}%;
+      --d: ${2 + Math.random() * 3}s;
+      --delay: ${Math.random() * 4}s;
+      --min-op: ${0.1 + Math.random() * 0.2};
+      --max-op: ${0.5 + Math.random() * 0.5};
+    `;
+    starsContainer.appendChild(star);
+  }
+
+  // Slideshow logic
+  const slides = document.querySelectorAll('.slide');
+  const dotsContainer = document.getElementById('#dots' ? 'dots' : 'dots');
+  let current = 0;
+
+  // Build dots
+  slides.forEach((_, i) => {
+    const dot = document.createElement('div');
+    dot.className = 'dot' + (i === 0 ? ' active' : '');
+    dotsContainer.appendChild(dot);
+  });
+
+  function goTo(n) {
+    slides[current].classList.remove('active');
+    dotsContainer.children[current].classList.remove('active');
+    current = (n + slides.length) % slides.length;
+    slides[current].classList.add('active');
+    dotsContainer.children[current].classList.add('active');
+  }
+
+  document.addEventListener('click', () => goTo(current + 1));
+  document.addEventListener('keydown', e => {
+    if (e.key === 'ArrowRight' || e.key === ' ') goTo(current + 1);
+    if (e.key === 'ArrowLeft') goTo(current - 1);
+  });
+
+  // Touch swipe
+  let touchStartX = 0;
+  document.addEventListener('touchstart', e => { touchStartX = e.touches[0].clientX; }, { passive: true });
+  document.addEventListener('touchend', e => {
+    const dx = touchStartX - e.changedTouches[0].clientX;
+    if (Math.abs(dx) > 40) goTo(current + (dx > 0 ? 1 : -1));
+  }, { passive: true });
+</script>
+</body>
+</html>
