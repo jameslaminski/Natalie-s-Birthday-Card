@@ -1297,6 +1297,118 @@
     </svg>
   </div>
 
+  <!-- ── SLIDE MAP: ROUTE ── -->
+  <div class="slide" id="slide-map">
+    <div class="map-eyebrow">✦ the journey ✦</div>
+    <div class="map-title">Your Route<br><span class="italic-title" style="color:var(--amber)">south to north</span></div>
+    <div class="map-container">
+      <div class="map-svg-wrap">
+        <svg id="map-svg" viewBox="0 0 400 460" fill="none" xmlns="http://www.w3.org/2000/svg" style="width:100%;display:block;">
+          <!--
+            Traced from provided silhouette. Taller than wide.
+            Big angular left protrusion. Two-lobed bottom.
+            Route: bottom-centre → north → hooks LEFT to Cradle.
+            Hobart:     238,400
+            Ross:       248,292
+            Sheffield:  172,178
+            Cradle:     145,198
+          -->
+
+          <!-- Tasmania polygon - traced from reference -->
+          <polygon points="
+            152,24  195,14  240,18  272,24  300,18  320,34
+            334,56  336,84  330,112 334,136 326,158 318,178
+            318,200 322,224 316,248 306,268 296,284 288,302
+            282,320 275,336 268,350 260,362 252,374 244,384
+            238,394 230,384 222,372 214,360 207,350 200,360
+            192,372 184,382 176,372 168,358 155,340 140,320
+            125,300 112,280 102,258  95,236  88,214  84,192
+             82,170  86,150  92,130  96,110  90, 92  86, 74
+             92, 56 104, 42 120, 30 138, 22
+          " fill="#1a2e1e" stroke="#3d6b55" stroke-width="1.5" stroke-linejoin="round"/>
+
+          <!-- Western highlands shading -->
+          <path d="M 88 168 Q 112 150 132 168 Q 148 184 140 208 Q 132 228 110 232 Q 88 236 80 216 Q 73 198 80 178 Z"
+            fill="#213d2a" opacity="0.4"/>
+
+          <!-- Terrain lines -->
+          <path d="M 155 52 Q 200 44 244 54 Q 282 62 312 84"  stroke="#2d4a3e" stroke-width="0.6" opacity="0.28" fill="none"/>
+          <path d="M 132 128 Q 192 118 252 130 Q 298 140 324 162" stroke="#2d4a3e" stroke-width="0.5" opacity="0.2"  fill="none"/>
+          <path d="M 112 215 Q 178 202 244 214 Q 290 224 316 246" stroke="#2d4a3e" stroke-width="0.5" opacity="0.16" fill="none"/>
+          <path d="M 112 298 Q 175 284 244 294 Q 288 302 308 320" stroke="#2d4a3e" stroke-width="0.4" opacity="0.12" fill="none"/>
+
+          <!-- ROUTE: Hobart → straight north → Ross → curves left → Sheffield → Cradle -->
+          <path id="route-path"
+            d="M 238 400
+               C 240 372, 243 345, 245 318
+               C 247 302, 248 292, 248 292
+               C 248 278, 246 260, 240 244
+               C 233 226, 218 210, 202 196
+               C 190 185, 180 180, 172 178
+               C 163 176, 153 179, 148 187
+               C 144 193, 143 196, 145 198"
+            stroke="#c8873a" stroke-width="1.8" fill="none"
+            stroke-dasharray="6 5" stroke-linecap="round" opacity="0.2"/>
+
+          <path id="route-draw"
+            d="M 238 400
+               C 240 372, 243 345, 245 318
+               C 247 302, 248 292, 248 292
+               C 248 278, 246 260, 240 244
+               C 233 226, 218 210, 202 196
+               C 190 185, 180 180, 172 178
+               C 163 176, 153 179, 148 187
+               C 144 193, 143 196, 145 198"
+            stroke="#c8873a" stroke-width="2.5" fill="none"
+            stroke-linecap="round" stroke-linejoin="round"
+            stroke-dasharray="700" stroke-dashoffset="700"
+            style="transition: stroke-dashoffset 1.8s cubic-bezier(0.4,0,0.2,1) 0.5s;"/>
+
+          <!-- Hobart -->
+          <circle id="pulse-hobart" cx="238" cy="400" r="10" fill="#c8873a" opacity="0"/>
+          <circle id="dot-hobart"   cx="238" cy="400" r="5"  fill="#c8873a" opacity="0"/>
+
+          <!-- Ross -->
+          <circle id="pulse-ross" cx="248" cy="292" r="10" fill="#c8873a" opacity="0"/>
+          <circle id="dot-ross"   cx="248" cy="292" r="5"  fill="#c8873a" opacity="0"/>
+
+          <!-- Sheffield -->
+          <circle id="pulse-shef" cx="172" cy="178" r="10" fill="#c8873a" opacity="0"/>
+          <circle id="dot-shef"   cx="172" cy="178" r="5"  fill="#c8873a" opacity="0"/>
+
+          <!-- Cradle Mountain -->
+          <circle id="pulse-cradle" cx="145" cy="198" r="12" fill="#a8c5a0" opacity="0"/>
+          <circle id="dot-cradle"   cx="145" cy="198" r="6"  fill="#a8c5a0" opacity="0"/>
+
+          <!-- Mountain icon at Cradle -->
+          <g id="mt-icon" opacity="0">
+            <polygon points="145,173 132,198 158,198" fill="#3d6b55"/>
+            <polygon points="145,173 140,187 150,187" fill="#f5ede0" opacity="0.9"/>
+          </g>
+
+        </svg>
+
+        <!-- Labels -->
+        <div class="map-label" id="lbl-hobart" style="bottom:3%;right:8%;">
+          <span class="lbl-name">Hobart</span>
+          Start · Fri afternoon
+        </div>
+        <div class="map-label" id="lbl-ross" style="bottom:28%;right:4%;">
+          <span class="lbl-name">Ross</span>
+          Fri night · Sat breakfast
+        </div>
+        <div class="map-label" id="lbl-shef" style="top:32%;left:42%;">
+          <span class="lbl-name">Sheffield</span>
+          Sat evening
+        </div>
+        <div class="map-label" id="lbl-cradle" style="top:40%;left:0%;">
+          <span class="lbl-name">Cradle Mountain</span>
+          Sun · Canyoning 🏔
+        </div>
+      </div>
+    </div>
+  </div>
+
   <!-- ── SLIDE 4: FRIDAY ── -->
   <div class="slide day-slide" id="slide-4">
     <div class="day-header">
@@ -1459,6 +1571,120 @@
     dotsContainer.appendChild(dot);
   });
 
+  // ── MAP ANIMATION ──
+  // Map slide index (0-based, after ticket=0, birthday=1, message=2, dest=3, map=4)
+  const slideIds = Array.from(slides).map(s => s.id);
+  const MAP_IDX = slideIds.indexOf('slide-map');
+
+  // Which location dots to show per slide index
+  // map=4, friday=5, saturday=6, sunday=7
+  const locationsBySlide = {
+    [MAP_IDX]:     ['hobart','ross','shef','cradle'],
+    [MAP_IDX + 1]: ['hobart','ross'],        // Friday: Hobart + Ross
+    [MAP_IDX + 2]: ['hobart','ross','shef'], // Saturday: + Sheffield
+    [MAP_IDX + 3]: ['hobart','ross','shef','cradle'], // Sunday: all
+  };
+
+  // Mini map overlay shown on day slides
+  function buildMiniMap() {
+    const mini = document.createElement('div');
+    mini.id = 'mini-map';
+    mini.style.cssText = `
+      position:fixed; bottom:18px; right:60px; width:80px; height:100px;
+      z-index:99; opacity:0; transition:opacity 0.5s ease;
+      pointer-events:none;
+    `;
+    mini.innerHTML = `<svg viewBox="0 0 400 460" style="width:100%;height:100%;filter:drop-shadow(0 2px 8px rgba(0,0,0,0.6))">
+      <polygon points="152,24 195,14 240,18 272,24 300,18 320,34 334,56 336,84 330,112 334,136 326,158 318,178 318,200 322,224 316,248 306,268 296,284 288,302 282,320 275,336 268,350 260,362 252,374 244,384 238,394 230,384 222,372 214,360 207,350 200,360 192,372 184,382 176,372 168,358 155,340 140,320 125,300 112,280 102,258 95,236 88,214 84,192 82,170 86,150 92,130 96,110 90,92 86,74 92,56 104,42 120,30 138,22"
+        fill="#1a2e1e" stroke="#3d6b55" stroke-width="2" stroke-linejoin="round"/>
+      <path d="M 238 400 C 240 372, 243 345, 245 318 C 247 302, 248 292, 248 292 C 248 278, 246 260, 240 244 C 233 226, 218 210, 202 196 C 190 185, 180 180, 172 178 C 163 176, 153 179, 148 187 C 144 193, 143 196, 145 198"
+        stroke="#c8873a" stroke-width="3" fill="none" stroke-dasharray="7 5" stroke-linecap="round" opacity="0.7"/>
+      <circle id="mini-dot-hobart" cx="238" cy="400" r="9"  fill="#c8873a" opacity="0"/>
+      <circle id="mini-dot-ross"   cx="248" cy="292" r="9"  fill="#c8873a" opacity="0"/>
+      <circle id="mini-dot-shef"   cx="172" cy="178" r="9"  fill="#c8873a" opacity="0"/>
+      <circle id="mini-dot-cradle" cx="145" cy="198" r="10" fill="#a8c5a0" opacity="0"/>
+    </svg>`;
+    document.body.appendChild(mini);
+    return mini;
+  }
+
+  const miniMap = buildMiniMap();
+
+  function updateMapDots(slideIdx) {
+    const locations = ['hobart','ross','shef','cradle'];
+    const active = locationsBySlide[slideIdx] || [];
+
+    // Full map dots + labels
+    locations.forEach(loc => {
+      const dot = document.getElementById(`dot-${loc}`);
+      const pulse = document.getElementById(`pulse-${loc}`);
+      const lbl = document.getElementById(`lbl-${loc}`);
+      const show = active.includes(loc);
+      if (dot) dot.style.opacity = show ? '1' : '0';
+      if (pulse) { pulse.style.opacity = show ? '0.15' : '0'; }
+      if (lbl) lbl.classList.toggle('visible', show);
+    });
+
+    // Mountain icon only at Cradle
+    const mtIcon = document.getElementById('mt-icon');
+    if (mtIcon) mtIcon.style.opacity = active.includes('cradle') ? '1' : '0';
+
+    // Mini map dots
+    locations.forEach(loc => {
+      const md = document.getElementById(`mini-dot-${loc}`);
+      if (md) md.style.opacity = active.includes(loc) ? '1' : '0';
+      if (md) md.style.transition = 'opacity 0.5s ease';
+    });
+  }
+
+  function triggerMapAnimation() {
+    // Animate the route drawing
+    const routeDraw = document.getElementById('route-draw');
+    const routePath = document.getElementById('route-path');
+    if (!routeDraw) return;
+
+    // Reset first
+    routeDraw.style.transition = 'none';
+    routeDraw.style.strokeDashoffset = '400';
+    routePath.style.opacity = '0.25';
+
+    // All dots hidden initially
+    ['hobart','ross','shef','cradle'].forEach(loc => {
+      const d = document.getElementById(`dot-${loc}`);
+      const p = document.getElementById(`pulse-${loc}`);
+      const l = document.getElementById(`lbl-${loc}`);
+      if (d) { d.style.transition = 'none'; d.style.opacity = '0'; }
+      if (p) { p.style.transition = 'none'; p.style.opacity = '0'; }
+      if (l) { l.classList.remove('visible'); }
+    });
+    const mt = document.getElementById('mt-icon');
+    if (mt) { mt.style.transition = 'none'; mt.style.opacity = '0'; }
+
+    requestAnimationFrame(() => requestAnimationFrame(() => {
+      // Draw path
+      routeDraw.style.transition = 'stroke-dashoffset 1.8s cubic-bezier(0.4,0,0.2,1) 0.5s';
+      routeDraw.style.strokeDashoffset = '0';
+
+      // Stagger dot appearances
+      const timings = { hobart: 500, ross: 1100, shef: 1650, cradle: 2150 };
+      Object.entries(timings).forEach(([loc, delay]) => {
+        setTimeout(() => {
+          const d = document.getElementById(`dot-${loc}`);
+          const p = document.getElementById(`pulse-${loc}`);
+          const l = document.getElementById(`lbl-${loc}`);
+          if (d) { d.style.transition = 'opacity 0.4s ease'; d.style.opacity = '1'; }
+          if (p) { p.style.transition = 'opacity 0.4s ease'; p.style.opacity = '0.15'; }
+          if (l) l.classList.add('visible');
+        }, delay);
+      });
+
+      setTimeout(() => {
+        const mt = document.getElementById('mt-icon');
+        if (mt) { mt.style.transition = 'opacity 0.4s ease'; mt.style.opacity = '1'; }
+      }, 2350);
+    }));
+  }
+
   function updateArrows() {
     arrowPrev.classList.toggle('hidden', current === 0);
     arrowNext.classList.toggle('hidden', current === slides.length - 1);
@@ -1471,6 +1697,17 @@
     slides[current].classList.add('active');
     dotsContainer.children[current].classList.add('active');
     updateArrows();
+
+    // Map slide: trigger animation
+    if (current === MAP_IDX) {
+      setTimeout(triggerMapAnimation, 400);
+      miniMap.style.opacity = '0';
+    }
+
+    // Day slides: show mini map with appropriate dots
+    const isDaySlide = locationsBySlide[current] && current !== MAP_IDX;
+    miniMap.style.opacity = isDaySlide ? '1' : '0';
+    if (isDaySlide) updateMapDots(current);
   }
 
   arrowPrev.addEventListener('click', () => goTo(current - 1));
